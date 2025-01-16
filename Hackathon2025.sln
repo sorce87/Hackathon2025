@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35303.130
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KnowledgeBaseApp", "..\KnowledgeBaseApp\KnowledgeBaseApp.csproj", "{BFEAE7B0-52B3-4254-A8E1-8B6128A83F66}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "DataAccess\DataAccess.csproj", "{E91DCE67-35D4-4BF2-BABB-3ADC004D9B6C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KnowledgeBaseWeb", "KnowledgeBaseWeb\KnowledgeBaseWeb.csproj", "{B19B7062-4B59-4F8C-A0D8-80785BA8C29E}"
@@ -15,10 +13,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{BFEAE7B0-52B3-4254-A8E1-8B6128A83F66}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BFEAE7B0-52B3-4254-A8E1-8B6128A83F66}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BFEAE7B0-52B3-4254-A8E1-8B6128A83F66}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BFEAE7B0-52B3-4254-A8E1-8B6128A83F66}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E91DCE67-35D4-4BF2-BABB-3ADC004D9B6C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E91DCE67-35D4-4BF2-BABB-3ADC004D9B6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E91DCE67-35D4-4BF2-BABB-3ADC004D9B6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
