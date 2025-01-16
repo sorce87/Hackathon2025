@@ -16,5 +16,6 @@ namespace DataAccess
     {
         public int CommentLinkId { get; set; }
         public Nullable<int> CommentId { get; set; }
+        public Nullable<int> ArticleId { get; set; }
     }
 }

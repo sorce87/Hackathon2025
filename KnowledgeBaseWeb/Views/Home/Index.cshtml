@@ -1,38 +1,87 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    Layout = "~/Views/Shared/_LayoutMain.cshtml";
 }
-
-<div class="search-helper__inner">
-    <h2 class="h1">We're here to help</h2>
-
-    <div class="search-form">
-        <form>
-            <input type="text" placeholder="What can we help you find?">
-            <input type="submit" value="submit">
-        </form>
-    </div>
-</div>
-
-<section class="documentation-links">
-    <div class="container">
-        <div class="documentation-links__inner">
-            <div class="row">
-               
-                    <div class="col">
-                        <div class="documentation-links__single">
-                            <a href="./details.html" class="anchor-overlay">null</a>
-
-                            <figure class="documentation-links__icon">
-                                <img src="./images/assignment.svg" alt="File Pencil Icon" height="28" width="28">
-                            </figure>
-                            <div class="documentation-links__content">
-                                <h2>Getting Started</h2>
-                                <p>Initial steps one takes to begin learning or using something new</p>
-                            </div>
-                        </div>
+        <!-- Popular Categories -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-bold mb-6">Popular Categories</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                    <div class="text-indigo-600 mb-4">
+                        <i class="fas fa-book-open text-2xl"></i>
                     </div>
-                
+                    <h3 class="text-xl font-semibold mb-2">Getting Started</h3>
+                    <p class="text-gray-600 mb-4">Everything you need to know to get up and running quickly.</p>
+                    <span class="text-sm text-gray-500">15 articles</span>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                    <div class="text-indigo-600 mb-4">
+                        <i class="fas fa-cogs text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Configuration</h3>
+                    <p class="text-gray-600 mb-4">Learn about system settings and customization options.</p>
+                    <span class="text-sm text-gray-500">23 articles</span>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                    <div class="text-indigo-600 mb-4">
+                        <i class="fas fa-shield-alt text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Security</h3>
+                    <p class="text-gray-600 mb-4">Best practices for keeping your account secure.</p>
+                    <span class="text-sm text-gray-500">18 articles</span>
+                </div>
             </div>
-        </div>
-    </div>
-</section>
+        </section>
+
+        <!-- Popular Articles -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-bold mb-6">Popular Articles</h2>
+            <div class="bg-white rounded-lg shadow-sm">
+                <div class="divide-y divide-gray-200">
+                    <article class="p-6 hover:bg-gray-50">
+                        <h3 class="text-lg font-semibold mb-2">
+                            <a href="#" class="text-indigo-600 hover:text-indigo-800">
+                                How to reset your password
+                            </a>
+                        </h3>
+                        <p class="text-gray-600 mb-2">Step-by-step guide to securely reset your account password.</p>
+                        <div class="flex items-center text-sm text-gray-500">
+                            <span class="mr-4"><i class="far fa-clock mr-1"></i> 5 min read</span>
+                            <span><i class="far fa-eye mr-1"></i> 2.5k views</span>
+                        </div>
+                    </article>
+                    <article class="p-6 hover:bg-gray-50">
+                        <h3 class="text-lg font-semibold mb-2">
+                            <a href="#" class="text-indigo-600 hover:text-indigo-800">
+                                Getting started with API integration
+                            </a>
+                        </h3>
+                        <p class="text-gray-600 mb-2">Learn the basics of integrating our API into your application.</p>
+                        <div class="flex items-center text-sm text-gray-500">
+                            <span class="mr-4"><i class="far fa-clock mr-1"></i> 10 min read</span>
+                            <span><i class="far fa-eye mr-1"></i> 4.2k views</span>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section>
+            <h2 class="text-2xl font-bold mb-6">Frequently Asked Questions</h2>
+            <div class="bg-white rounded-lg shadow-sm divide-y divide-gray-200">
+                <div class="p-6">
+                    <h3 class="text-lg font-semibold mb-2">How do I contact support?</h3>
+                    <p class="text-gray-600">You can reach our support team through the contact form or by emailing support@knowhub.com</p>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-lg font-semibold mb-2">What payment methods do you accept?</h3>
+                    <p class="text-gray-600">We accept all major credit cards, PayPal, and bank transfers for business accounts.</p>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-lg font-semibold mb-2">Can I upgrade my plan later?</h3>
+                    <p class="text-gray-600">Yes, you can upgrade or downgrade your plan at any time from your account settings.</p>
+                </div>
+            </div>
+        </section>
+
+   
