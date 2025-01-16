@@ -21,5 +21,6 @@ namespace DataAccess
         public string AuthorEmail { get; set; }
         public Nullable<int> ArticleId { get; set; }
         public Nullable<bool> IsDeleted { get; set; }
+        public Nullable<int> UserId { get; set; }
     }
 }

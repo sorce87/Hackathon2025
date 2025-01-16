@@ -27,7 +27,7 @@ namespace DataAccess
         public Nullable<int> ProductId { get; set; }
         public Nullable<int> LikeCount { get; set; }
         public Nullable<bool> IsDeleted { get; set; }
-        public Nullable<int> CommentLinkId { get; set; }
+        public int CommentLinkId { get; set; }
     
         public virtual Category Category { get; set; }
         public virtual Product Product { get; set; }

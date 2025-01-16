@@ -30,7 +30,7 @@ namespace DataAccess
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<ValueStream> ValueStreams { get; set; }
-        public virtual DbSet<Comment> Comments { get; set; }
         public virtual DbSet<CommentLink> CommentLinks { get; set; }
+        public virtual DbSet<Comment> Comments { get; set; }
     }
 }

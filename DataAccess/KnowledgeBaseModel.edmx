@@ -9,7 +9,7 @@
           <Key>
             <PropertyRef Name="ArticleId" />
           </Key>
-          <Property Name="ArticleId" Type="int" Nullable="false" />
+          <Property Name="ArticleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Title" Type="nvarchar" MaxLength="200" />
           <Property Name="Content" Type="nvarchar(max)" />
           <Property Name="CreatedDate" Type="datetime" />
@@ -22,7 +22,7 @@
           <Property Name="ProductId" Type="int" />
           <Property Name="LikeCount" Type="int" />
           <Property Name="IsDeleted" Type="bit" />
-          <Property Name="CommentLinkId" Type="int" />
+          <Property Name="CommentLinkId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Category">
           <Key>
@@ -43,6 +43,7 @@
           <Property Name="AuthorEmail" Type="nvarchar(max)" />
           <Property Name="ArticleId" Type="int" />
           <Property Name="IsDeleted" Type="bit" />
+          <Property Name="UserId" Type="int" />
         </EntityType>
         <EntityType Name="CommentLinks">
           <Key>
@@ -175,8 +176,8 @@
             <End Role="ValueStream" EntitySet="ValueStreams" />
             <End Role="Article" EntitySet="Articles" />
           </AssociationSet>
-          <EntitySet Name="Comments" EntityType="KnowledgeBaseModel.Comment" />
           <EntitySet Name="CommentLinks" EntityType="KnowledgeBaseModel.CommentLink" />
+          <EntitySet Name="Comments" EntityType="KnowledgeBaseModel.Comment" />
         </EntityContainer>
         <EntityType Name="Article">
           <Key>
@@ -195,7 +196,7 @@
           <Property Name="ProductId" Type="Int32" />
           <Property Name="LikeCount" Type="Int32" />
           <Property Name="IsDeleted" Type="Boolean" />
-          <Property Name="CommentLinkId" Type="Int32" />
+          <Property Name="CommentLinkId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Category" Relationship="KnowledgeBaseModel.FK_Article_Category" FromRole="Article" ToRole="Category" />
           <NavigationProperty Name="Product" Relationship="KnowledgeBaseModel.FK_Article_Product" FromRole="Article" ToRole="Product" />
           <NavigationProperty Name="User" Relationship="KnowledgeBaseModel.FK_Article_User" FromRole="Article" ToRole="User" />
@@ -286,6 +287,13 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="CommentLink">
+          <Key>
+            <PropertyRef Name="CommentLinkId" />
+          </Key>
+          <Property Name="CommentLinkId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CommentId" Type="Int32" />
+        </EntityType>
         <EntityType Name="Comment">
           <Key>
             <PropertyRef Name="CommentId" />
@@ -297,13 +305,7 @@
           <Property Name="AuthorEmail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="ArticleId" Type="Int32" />
           <Property Name="IsDeleted" Type="Boolean" />
-        </EntityType>
-        <EntityType Name="CommentLink">
-          <Key>
-            <PropertyRef Name="CommentLinkId" />
-          </Key>
-          <Property Name="CommentLinkId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CommentId" Type="Int32" />
+          <Property Name="UserId" Type="Int32" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -368,9 +370,18 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="CommentLinks">
+            <EntityTypeMapping TypeName="KnowledgeBaseModel.CommentLink">
+              <MappingFragment StoreEntitySet="CommentLinks">
+                <ScalarProperty Name="CommentId" ColumnName="CommentId" />
+                <ScalarProperty Name="CommentLinkId" ColumnName="CommentLinkId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Comments">
             <EntityTypeMapping TypeName="KnowledgeBaseModel.Comment">
               <MappingFragment StoreEntitySet="Comment">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
                 <ScalarProperty Name="ArticleId" ColumnName="ArticleId" />
                 <ScalarProperty Name="AuthorEmail" ColumnName="AuthorEmail" />
@@ -378,14 +389,6 @@
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="Content" ColumnName="Content" />
                 <ScalarProperty Name="CommentId" ColumnName="CommentId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CommentLinks">
-            <EntityTypeMapping TypeName="KnowledgeBaseModel.CommentLink">
-              <MappingFragment StoreEntitySet="CommentLinks">
-                <ScalarProperty Name="CommentId" ColumnName="CommentId" />
-                <ScalarProperty Name="CommentLinkId" ColumnName="CommentLinkId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

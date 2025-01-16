@@ -14,8 +14,8 @@
         <AssociationConnector Association="KnowledgeBaseModel.FK_Article_Product" />
         <AssociationConnector Association="KnowledgeBaseModel.FK_Article_User" />
         <AssociationConnector Association="KnowledgeBaseModel.FK_Article_ValueStream" />
-        <EntityTypeShape EntityType="KnowledgeBaseModel.Comment" Width="1.5" PointX="8.5" PointY="0.75" />
         <EntityTypeShape EntityType="KnowledgeBaseModel.CommentLink" Width="1.5" PointX="10.625" PointY="0.75" />
+        <EntityTypeShape EntityType="KnowledgeBaseModel.Comment" Width="1.5" PointX="8.25" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
