@@ -22,7 +22,16 @@ namespace DataAccess
         public Nullable<int> CategoryId { get; set; }
         public string Tags { get; set; }
         public Nullable<int> ViewCount { get; set; }
+        public Nullable<int> UserId { get; set; }
+        public Nullable<int> ValueStreamId { get; set; }
+        public Nullable<int> ProductId { get; set; }
+        public Nullable<int> LikeCount { get; set; }
+        public Nullable<bool> IsDeleted { get; set; }
+        public Nullable<int> CommentLinkId { get; set; }
     
         public virtual Category Category { get; set; }
+        public virtual Product Product { get; set; }
+        public virtual User User { get; set; }
+        public virtual ValueStream ValueStream { get; set; }
     }
 }
