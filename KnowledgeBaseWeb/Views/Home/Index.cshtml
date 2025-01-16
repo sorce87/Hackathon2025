@@ -2,7 +2,38 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="search-helper__inner">
+    <h2 class="h1">We're here to help</h2>
+
+    <div class="search-form">
+        <form>
+            <input type="text" placeholder="What can we help you find?">
+            <input type="submit" value="submit">
+        </form>
+    </div>
 </div>
+
+<section class="documentation-links">
+    <div class="container">
+        <div class="documentation-links__inner">
+            <div class="row">
+                @foreach (var item in Model.Categories)
+                {
+                    <div class="col">
+                        <div class="documentation-links__single">
+                            <a href="./details.html" class="anchor-overlay">null</a>
+
+                            <figure class="documentation-links__icon">
+                                <img src="./images/assignment.svg" alt="File Pencil Icon" height="28" width="28">
+                            </figure>
+                            <div class="documentation-links__content">
+                                <h2>Getting Started</h2>
+                                <p>Initial steps one takes to begin learning or using something new</p>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>

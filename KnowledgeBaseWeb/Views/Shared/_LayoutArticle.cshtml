@@ -1,0 +1,113 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - KnowledgeBaseWeb</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/KnowledgeBaseWeb.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <main class="site-content">
+        <div class="d-flex flex-wrap documentation-page">
+            <aside class="documentation-sidebar">
+                <div class="documentation-sidebar__logo">
+                    <a href="./index.html">
+                        <img src="./images/logo.svg" height="44" width="123" alt="Star Services Logo">
+                    </a>
+                </div>
+
+                <div class="search-form documentation-sidebar__form">
+                    <form>
+                        <input type="text" placeholder="What can we help you find?">
+                        <input type="submit" value="submit">
+                    </form>
+                </div>
+
+                <div class="documentation-sidebar__menu">
+                    <ul>
+                        <li class="menu-item">
+                            <a href="#">Getting Started</a>
+                        </li>
+                        <li class="menu-item">
+                            <a href="#">Billing &amp; Accounts</a>
+                        </li>
+                        <li class="menu-item">
+                            <a href="#">Report &amp; Analytics</a>
+                        </li>
+                        <li class="menu-item menu-item-has-children">
+                            <a href="#">Advanced Configuration</a>
+
+                            <ul>
+                                <li class="menu-item">
+                                    <a href="#">Introduction to Advanced Configuration</a>
+                                </li>
+                                <li class="menu-item">
+                                    <a href="#">Understanding the Purpose of Advanced Configuration</a>
+                                </li>
+                                <li class="menu-item current-menu-item">
+                                    <a href="#">Key Components of Advanced Configuration</a>
+                                </li>
+                                <li class="menu-item">
+                                    <a href="#">Best Practices for Advanced Configuration</a>
+                                </li>
+                                <li class="menu-item">
+                                    <a href="#">Security Considerations for Advanced Configuration</a>
+                                </li>
+                                <li class="menu-item">
+                                    <a href="#">Advanced Configuration Tools and Techniques</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="menu-item">
+                            <a href="#">File Downloads</a>
+                        </li>
+                        <li class="menu-item">
+                            <a href="#">How to Articles</a>
+                        </li>
+                        <li class="menu-item">
+                            <a href="#">Developer APIs</a>
+                        </li>
+                        <li class="menu-item">
+                            <a href="#">Terms & Policies</a>
+                        </li>
+                    </ul>
+                </div>
+            </aside>
+
+            <button type="button" class="documentation-sidebar__toggle">
+                <img src="./images/arrow-right.svg" alt="Arrow Right/Left Icon" height="30" width="30">
+            </button>
+
+            <div class="documentation-content">
+                <ul class="breadcrumbs">
+                    <li>
+                        <a href="./index.html">Knowledge Base</a>
+                    </li>
+                    <li>
+                        <a href="#">Advanced Configurations</a>
+                    </li>
+                    <li>Key Components of Advanced Configuration</li>
+                </ul>
+
+                <div class="text-content">
+                   @RenderBody()
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="./js/script.min.js"></script>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2025 - KnowledgeBaseWeb - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
