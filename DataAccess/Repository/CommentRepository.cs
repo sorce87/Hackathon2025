@@ -60,14 +60,6 @@ namespace DataAccess.Repository
                 };
                 _dbContext.Comments.Add(comment);
                 await _dbContext.SaveChangesAsync();
-
-                CommentLink commentLink = new CommentLink
-                {
-                    ArticleId = comment.ArticleId,
-                    CommentId = comment.CommentId
-                };
-                _dbContext.CommentLinks.Add(commentLink);
-                await _dbContext.SaveChangesAsync();
                 return comment;
             }
             catch (Exception ex)
