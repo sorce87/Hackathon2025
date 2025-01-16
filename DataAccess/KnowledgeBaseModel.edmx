@@ -22,7 +22,6 @@
           <Property Name="ProductId" Type="int" />
           <Property Name="LikeCount" Type="int" />
           <Property Name="IsDeleted" Type="bit" />
-          <Property Name="CommentLinkId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Category">
           <Key>
@@ -44,13 +43,6 @@
           <Property Name="ArticleId" Type="int" />
           <Property Name="IsDeleted" Type="bit" />
           <Property Name="UserId" Type="int" />
-        </EntityType>
-        <EntityType Name="CommentLinks">
-          <Key>
-            <PropertyRef Name="CommentLinkId" />
-          </Key>
-          <Property Name="CommentLinkId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="CommentId" Type="int" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
@@ -129,7 +121,6 @@
           <EntitySet Name="Article" EntityType="Self.Article" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Comment" EntityType="Self.Comment" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="CommentLinks" EntityType="Self.CommentLinks" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ValueStream" EntityType="Self.ValueStream" Schema="dbo" store:Type="Tables" />
@@ -155,11 +146,12 @@
     <edmx:ConceptualModels>
       <Schema Namespace="KnowledgeBaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="KnowledgeBaseEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Articles" EntityType="KnowledgeBaseModel.Article" />
           <EntitySet Name="Categories" EntityType="KnowledgeBaseModel.Category" />
           <EntitySet Name="Products" EntityType="KnowledgeBaseModel.Product" />
           <EntitySet Name="Users" EntityType="KnowledgeBaseModel.User" />
           <EntitySet Name="ValueStreams" EntityType="KnowledgeBaseModel.ValueStream" />
+          <EntitySet Name="Comments" EntityType="KnowledgeBaseModel.Comment" />
+          <EntitySet Name="Articles" EntityType="KnowledgeBaseModel.Article" />
           <AssociationSet Name="FK_Article_Category" Association="KnowledgeBaseModel.FK_Article_Category">
             <End Role="Category" EntitySet="Categories" />
             <End Role="Article" EntitySet="Articles" />
@@ -176,32 +168,7 @@
             <End Role="ValueStream" EntitySet="ValueStreams" />
             <End Role="Article" EntitySet="Articles" />
           </AssociationSet>
-          <EntitySet Name="CommentLinks" EntityType="KnowledgeBaseModel.CommentLink" />
-          <EntitySet Name="Comments" EntityType="KnowledgeBaseModel.Comment" />
         </EntityContainer>
-        <EntityType Name="Article">
-          <Key>
-            <PropertyRef Name="ArticleId" />
-          </Key>
-          <Property Name="ArticleId" Type="Int32" Nullable="false" />
-          <Property Name="Title" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
-          <Property Name="LastModifiedDate" Type="DateTime" Precision="3" />
-          <Property Name="CategoryId" Type="Int32" />
-          <Property Name="Tags" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="ViewCount" Type="Int32" />
-          <Property Name="UserId" Type="Int32" />
-          <Property Name="ValueStreamId" Type="Int32" />
-          <Property Name="ProductId" Type="Int32" />
-          <Property Name="LikeCount" Type="Int32" />
-          <Property Name="IsDeleted" Type="Boolean" />
-          <Property Name="CommentLinkId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Category" Relationship="KnowledgeBaseModel.FK_Article_Category" FromRole="Article" ToRole="Category" />
-          <NavigationProperty Name="Product" Relationship="KnowledgeBaseModel.FK_Article_Product" FromRole="Article" ToRole="Product" />
-          <NavigationProperty Name="User" Relationship="KnowledgeBaseModel.FK_Article_User" FromRole="Article" ToRole="User" />
-          <NavigationProperty Name="ValueStream" Relationship="KnowledgeBaseModel.FK_Article_ValueStream" FromRole="Article" ToRole="ValueStream" />
-        </EntityType>
         <EntityType Name="Category">
           <Key>
             <PropertyRef Name="CategoryId" />
@@ -238,6 +205,41 @@
           <Property Name="ValueStreamId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Articles" Relationship="KnowledgeBaseModel.FK_Article_ValueStream" FromRole="ValueStream" ToRole="Article" />
+        </EntityType>
+        <EntityType Name="Comment">
+          <Key>
+            <PropertyRef Name="CommentId" />
+          </Key>
+          <Property Name="CommentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="AuthorName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AuthorEmail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ArticleId" Type="Int32" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="UserId" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Article">
+          <Key>
+            <PropertyRef Name="ArticleId" />
+          </Key>
+          <Property Name="ArticleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="LastModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="CategoryId" Type="Int32" />
+          <Property Name="Tags" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ViewCount" Type="Int32" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="ValueStreamId" Type="Int32" />
+          <Property Name="ProductId" Type="Int32" />
+          <Property Name="LikeCount" Type="Int32" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <NavigationProperty Name="Category" Relationship="KnowledgeBaseModel.FK_Article_Category" FromRole="Article" ToRole="Category" />
+          <NavigationProperty Name="Product" Relationship="KnowledgeBaseModel.FK_Article_Product" FromRole="Article" ToRole="Product" />
+          <NavigationProperty Name="User" Relationship="KnowledgeBaseModel.FK_Article_User" FromRole="Article" ToRole="User" />
+          <NavigationProperty Name="ValueStream" Relationship="KnowledgeBaseModel.FK_Article_ValueStream" FromRole="Article" ToRole="ValueStream" />
         </EntityType>
         <Association Name="FK_Article_Category">
           <End Type="KnowledgeBaseModel.Category" Role="Category" Multiplicity="0..1" />
@@ -287,52 +289,12 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="CommentLink">
-          <Key>
-            <PropertyRef Name="CommentLinkId" />
-          </Key>
-          <Property Name="CommentLinkId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CommentId" Type="Int32" />
-        </EntityType>
-        <EntityType Name="Comment">
-          <Key>
-            <PropertyRef Name="CommentId" />
-          </Key>
-          <Property Name="CommentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
-          <Property Name="AuthorName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="AuthorEmail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="ArticleId" Type="Int32" />
-          <Property Name="IsDeleted" Type="Boolean" />
-          <Property Name="UserId" Type="Int32" />
-        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="KnowledgeBaseModelStoreContainer" CdmEntityContainer="KnowledgeBaseEntities">
-          <EntitySetMapping Name="Articles">
-            <EntityTypeMapping TypeName="KnowledgeBaseModel.Article">
-              <MappingFragment StoreEntitySet="Article">
-                <ScalarProperty Name="CommentLinkId" ColumnName="CommentLinkId" />
-                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-                <ScalarProperty Name="LikeCount" ColumnName="LikeCount" />
-                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
-                <ScalarProperty Name="ValueStreamId" ColumnName="ValueStreamId" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="ViewCount" ColumnName="ViewCount" />
-                <ScalarProperty Name="Tags" ColumnName="Tags" />
-                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
-                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="Content" ColumnName="Content" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="ArticleId" ColumnName="ArticleId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Categories">
             <EntityTypeMapping TypeName="KnowledgeBaseModel.Category">
               <MappingFragment StoreEntitySet="Category">
@@ -370,14 +332,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="CommentLinks">
-            <EntityTypeMapping TypeName="KnowledgeBaseModel.CommentLink">
-              <MappingFragment StoreEntitySet="CommentLinks">
-                <ScalarProperty Name="CommentId" ColumnName="CommentId" />
-                <ScalarProperty Name="CommentLinkId" ColumnName="CommentLinkId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Comments">
             <EntityTypeMapping TypeName="KnowledgeBaseModel.Comment">
               <MappingFragment StoreEntitySet="Comment">
@@ -389,6 +343,25 @@
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="Content" ColumnName="Content" />
                 <ScalarProperty Name="CommentId" ColumnName="CommentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Articles">
+            <EntityTypeMapping TypeName="KnowledgeBaseModel.Article">
+              <MappingFragment StoreEntitySet="Article">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="LikeCount" ColumnName="LikeCount" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="ValueStreamId" ColumnName="ValueStreamId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ViewCount" ColumnName="ViewCount" />
+                <ScalarProperty Name="Tags" ColumnName="Tags" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="ArticleId" ColumnName="ArticleId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -30,7 +30,6 @@ namespace KnowledgeBaseWeb.Controllers
                 IsDeleted = false,
                 UserId = userId
             };
-
             var response = await _context.AddComment(comment);
 
             if (response != null)

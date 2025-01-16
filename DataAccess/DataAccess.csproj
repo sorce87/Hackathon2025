@@ -60,7 +60,6 @@
     <Compile Include="Category.cs">
       <DependentUpon>KnowledgeBaseModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Class1.cs" />
     <Compile Include="Comment.cs">
       <DependentUpon>KnowledgeBaseModel.tt</DependentUpon>
     </Compile>
