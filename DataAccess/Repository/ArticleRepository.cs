@@ -33,6 +33,9 @@ namespace DataAccess.Repository
             try
             {
                 var article = _dbContext.Articles.Where(x => x.UserId == id).FirstOrDefault();
+                article.ViewCount += 1;
+
+                _dbContext.SaveChanges();
                 return article;
             }
             catch (Exception ex)
@@ -46,6 +49,15 @@ namespace DataAccess.Repository
         {
             try
             {
+                article.UserId = 1;
+                article.CreatedDate = DateTime.Now;
+                article.LastModifiedDate = DateTime.Now;
+                article.LikeCount = 0;
+                article.ViewCount = 0;
+                article.ProductId = 1;
+                article.CategoryId = 1;
+                article.IsDeleted = false;
+
                 _dbContext.Articles.Add(article);
                 _dbContext.SaveChanges();
             }

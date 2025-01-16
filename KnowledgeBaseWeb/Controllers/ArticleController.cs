@@ -1,4 +1,6 @@
-﻿using DataAccess.Interfaces;
+﻿using DataAccess;
+using DataAccess.Interfaces;
+using KnowledgeBaseWeb.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -21,7 +23,7 @@ namespace KnowledgeBaseWeb.Controllers
         // GET: ArticleController/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            return View(_articleRepository.GetArticleById(id));
         }
 
         // GET: ArticleController/Create
@@ -33,7 +35,7 @@ namespace KnowledgeBaseWeb.Controllers
         // POST: ArticleController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(Article article)
         {
             try
             {
@@ -52,7 +54,7 @@ namespace KnowledgeBaseWeb.Controllers
                 //    CreatedDate = DateTime.Now,
                 //    LastModifiedDate = DateTime.Now,
                 //}));
-
+                _articleRepository.CreateArticle(article);
 
                 return RedirectToAction(nameof(Index));
             }
