@@ -5,10 +5,17 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="c8eda11fc2f6449fba136cfcd6f589c6" Name="Diagram1">
-        <EntityTypeShape EntityType="KnowledgeBaseModel.Comment" Width="1.5" PointX="6.125" PointY="0.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="KnowledgeBaseModel.Article" Width="1.5" PointX="3.75" PointY="0.5" />
-        <EntityTypeShape EntityType="KnowledgeBaseModel.Category" Width="1.5" PointX="1.5" PointY="1" />
+        <EntityTypeShape EntityType="KnowledgeBaseModel.Article" Width="1.5" PointX="4" PointY="0.75" />
+        <EntityTypeShape EntityType="KnowledgeBaseModel.Category" Width="1.5" PointX="1.75" PointY="2.625" />
+        <EntityTypeShape EntityType="KnowledgeBaseModel.CommentLink" Width="1.5" PointX="10.75" PointY="0.75" />
+        <EntityTypeShape EntityType="KnowledgeBaseModel.Product" Width="1.5" PointX="6.125" PointY="0.75" />
+        <EntityTypeShape EntityType="KnowledgeBaseModel.User" Width="1.5" PointX="6.125" PointY="2.625" />
+        <EntityTypeShape EntityType="KnowledgeBaseModel.ValueStream" Width="1.5" PointX="1.875" PointY="0.75" />
         <AssociationConnector Association="KnowledgeBaseModel.FK_Article_Category" />
+        <AssociationConnector Association="KnowledgeBaseModel.FK_Article_Product" />
+        <AssociationConnector Association="KnowledgeBaseModel.FK_Article_User" />
+        <AssociationConnector Association="KnowledgeBaseModel.FK_Article_ValueStream" />
+        <EntityTypeShape EntityType="KnowledgeBaseModel.Comment" Width="1.5" PointX="8.5" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
