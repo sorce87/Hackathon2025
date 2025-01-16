@@ -8,6 +8,9 @@ namespace DataAccess.Interfaces
 {
     public interface ICommentRepository
     {
-        Task<Comment> GetCommentByArticleId(int articleId);
+        Task<User> GetUserById(int userId);
+        Task<List<Comment>> GetCommentByArticleId(int articleId, int userId);
+        Task<Comment> AddComment(Comment comment);
+        Task<Comment> DeleteComment(int commentId);
     }
 }

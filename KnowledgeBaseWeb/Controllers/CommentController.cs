@@ -4,7 +4,7 @@ using DataAccess.Repository;
 using Microsoft.AspNetCore.Mvc;
 
 namespace KnowledgeBaseWeb.Controllers
-{
+{ 
     public class CommentController : Controller
     {
         private readonly ICommentRepository _context = new CommentRepository();
@@ -19,49 +19,42 @@ namespace KnowledgeBaseWeb.Controllers
             {
                 return BadRequest("Comment content cannot be empty");
             }
-
+            var author = await _context.GetUserById(userId);
             var comment = new Comment
             {
                 ArticleId = articleId,
                 Content = content,
                 CreatedDate = DateTime.UtcNow,
-                AuthorName = "Anonymous", // Replace with actual user name when authentication is added
-                AuthorEmail = "anonymous@example.com",
+                AuthorName = author.FirstName + " " + author.LastName, 
+                AuthorEmail = author.Email,
                 IsDeleted = false,
                 UserId = userId
             };
 
-            //_context.Comment.Add(comment);
-            //await _context.SaveChangesAsync();
+            var response = await _context.AddComment(comment);
+
+            if (response != null)
+            {
+                return RedirectToAction("index", "Article", new { id = articleId });
+            }
+            return RedirectToAction("index", "Article");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(int commentId)
+        {
+            var comment = await _context.DeleteComment(commentId);
+            if (comment == null)
+            {
+                return NotFound();
+            }
 
             if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
             {
-                return PartialView("_CommentPartial", comment);
+                return Json(new { success = true });
             }
 
-            return RedirectToAction("Details", "Articles", new { id = articleId });
+            return RedirectToAction("Details", "Articles", new { id = comment.ArticleId });
         }
-
-        //[HttpPost]
-        //public async Task<IActionResult> Delete(int id)
-        //{
-        //    var comment = await _context.Comments.FindAsync(id);
-        //    if (comment == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    // Soft delete
-        //    comment.IsDeleted = true;
-        //    comment.Content = "[Comment deleted]";
-        //    await _context.SaveChangesAsync();
-
-        //    if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
-        //    {
-        //        return Json(new { success = true });
-        //    }
-
-        //    return RedirectToAction("Details", "Articles", new { id = comment.ArticleId });
-        //}
     }
 }
