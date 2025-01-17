@@ -2,25 +2,26 @@
 @model DataAccess.Article
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Edit";
     Layout = "~/Views/Shared/_LayoutMain.cshtml";
 }
 
 <main class="max-w-3xl mx-auto px-4 py-8">
     <article class="bg-white rounded-lg shadow-sm p-6 md:p-8">
         <section id="steps" class="mb-8">
-            <h2 class="text-2xl font-bold mb-4 text-gray-700 text-center ">Create A New Article</h2>
+            <h2 class="text-2xl font-bold mb-4 text-gray-700 text-center ">Edit Article</h2>
             <div class="space-y-4">
                 <div class="bg-gray-50 p-4 rounded-lg text-gray-700">
-                    @using (Html.BeginForm("Create", "Article", FormMethod.Post, new { encypt = "multipart/form-data", @class = "form-group" }))
+                    @using (Html.BeginForm("Edit", "Article", FormMethod.Post, new { encypt = "multipart/form-data", @class = "form-group" }))
                     {
+                        <input hidden required type="text" name="ArticleId" value="@Model.ArticleId" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" />
                         <div class="bg-gray-50 p-1 rounded-md">
                             <h6 class="font-semibold mb-2">Title</h6>
-                            <input required type="text" name="Title" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" />
+                            <input required type="text" name="Title" value="@Model.Title" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" />
                         </div>
                         <div class="bg-gray-50 p-1 rounded-md">
                             <h6 class="font-semibold mb-2">Content</h6>
-                            <textarea required type="text" name="Content" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"></textarea>
+                            <textarea required type="text" name="Content" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">@Model.Content</textarea>
                         </div>
                         <table class="table table-responsive-md">
                             <tr>

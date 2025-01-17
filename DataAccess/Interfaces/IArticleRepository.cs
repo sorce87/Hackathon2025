@@ -12,5 +12,10 @@ namespace DataAccess.Interfaces
         List<Article> GetArticles();
         //Article EditArticle(int id);
         void CreateArticle(Article article);
+        void EditArticle(Article article);
+        Article LikeIncrement(int articleId);
+        void ViewsIncrement(int articleId);
+        List<Comment> GetCommentsForArticle(int id);
+        List<Article> SearchArticles(string searchWord);
     }
 }

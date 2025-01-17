@@ -1,0 +1,81 @@
+﻿@model IEnumerable<DataAccess.Article>
+@using System.Globalization
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LayoutMain.cshtml";
+}
+
+<!-- Filters -->
+<section class="mb-12">
+    <h2 class="text-2xl font-bold mb-6">Filter Search Results</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+            <p class="text-sm font-semibold mb-2">
+                By Product
+                <select name="ProductId" id="ProductId" class="border rounded-lg px-4 py-2 bg-white">
+                    <option value="1">SAHL Cancellations Attorney</option>
+                    <option value="2">SAHL Cancellations Bank</option>
+                </select>
+            </p>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+            <p class="text-sm font-semibold mb-2">
+                By Value Stream
+                <select name="ValueStreamId" id="ValueStreamId" class="border rounded-lg px-4 py-2 bg-white">
+                    <option value="1">Cancellations</option>
+                    <option value="2">Bonds</option>
+                    <option value="3">Transfers</option>
+                    <option value="4">Credit</option>
+                    <option value="5">Registration</option>
+                </select>
+            </p>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+            <p class="text-sm font-semibold mb-2">
+                By Category
+                <select name="CategoryId" id="CategoryId" class="border rounded-lg px-4 py-2 bg-white">
+                    <option value="1">Development</option>
+                    <option value="2">Business Analysis</option>
+                    <option value="3">Quality Assurance</option>
+                    <option value="4">Support</option>
+                    <option value="5">Academy</option>
+                    <option value="6">Marketing</option>
+                    <option value="7">Human Resource</option>
+                    <option value="8">Finance</option>
+                </select>
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- Articles List -->
+<div class="space-y-4">
+    @foreach (var item in Model)
+    {
+        <!-- Article Card -->
+        <article class="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow">
+            <div class="p-6">
+                <div class="flex items-start justify-between">
+                    <div>
+                        <h2 class="text-xl font-semibold mb-2">
+                            <a href="~/Article/Details/@item.ArticleId" class="text-indigo-600 hover:text-indigo-800">
+                                @item.Title
+                            </a>
+                        </h2>
+                        <p class="text-gray-600 mb-4" style="text-overflow:ellipsis; overflow:hidden; white-space:nowrap;width:600px;"> @item.Content</p>
+                        <div class="flex flex-wrap items-center gap-4 text-sm text-gray-500">
+                            <span><i class="far fa-clock mr-1"></i> Updated @item.LastModifiedDate?.ToString("dd MMM yyyy", CultureInfo.InvariantCulture)</span>
+                            <span><i class="far fa-eye mr-1"></i> 2.5k views</span>
+                            <span><i class="far fa-user mr-1"></i> By @item.User.FirstName @item.User.LastName</span>
+                            <span class="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs">Beginner</span>
+                        </div>
+                        <a class="btn btn-outline-warning" asp-action="Edit" asp-route-id="@item.ArticleId">EDIT ARTICLE</a>
+                    </div>
+                    <div class="text-gray-400">
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                </div>
+            </div>
+        </article>
+    }
+</div>

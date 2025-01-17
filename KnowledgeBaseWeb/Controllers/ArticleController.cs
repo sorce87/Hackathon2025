@@ -1,5 +1,6 @@
 ﻿using DataAccess;
 using DataAccess.Interfaces;
+using DataAccess.Repository;
 using KnowledgeBaseWeb.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -10,6 +11,7 @@ namespace KnowledgeBaseWeb.Controllers
     public class ArticleController : Controller
     {
         public readonly IArticleRepository _articleRepository;
+        private readonly ICommentRepository _commentRepository = new CommentRepository();
         // GET: ArticleController
         public ArticleController(IArticleRepository articleRepository)
         {
@@ -20,10 +22,21 @@ namespace KnowledgeBaseWeb.Controllers
             return View(_articleRepository.GetArticles());
         }
 
+        public ActionResult Search(string searchWord = "")
+        {
+            return View(_articleRepository.SearchArticles(searchWord));
+        }
+
         // GET: ArticleController/Details/5
         public ActionResult Details(int id)
         {
-            return View(_articleRepository.GetArticleById(id));
+            _articleRepository.ViewsIncrement(id);
+            var article = _articleRepository.GetArticleById(id);
+            var comments = _articleRepository.GetCommentsForArticle(id);
+            var articleComments = new ArticleCommentsViewModel();
+            articleComments.Comments = comments;
+            articleComments.Article = article;
+            return View(articleComments);
         }
 
         // GET: ArticleController/Create
@@ -39,21 +52,6 @@ namespace KnowledgeBaseWeb.Controllers
         {
             try
             {
-                //var article = new Article({
-                //    CategoryId = 0,
-                //    CommentLinkId = 0,
-                //    Content = "",
-                //    IsDeleted = false,
-                //    LikeCount = 0,
-                //    ProductId = 0,
-                //    Tags = null,
-                //    UserId = 0,
-                //    ValueStreamId = 0,
-                //    ViewCount = 0,
-                //    Title = "",
-                //    CreatedDate = DateTime.Now,
-                //    LastModifiedDate = DateTime.Now,
-                //}));
                 _articleRepository.CreateArticle(article);
 
                 return RedirectToAction(nameof(Index));
@@ -67,16 +65,17 @@ namespace KnowledgeBaseWeb.Controllers
         // GET: ArticleController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            return View(_articleRepository.GetArticleById(id));
         }
 
         // POST: ArticleController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(int id, Article article)
         {
             try
             {
+                _articleRepository.EditArticle(article);
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -85,6 +84,18 @@ namespace KnowledgeBaseWeb.Controllers
             }
         }
 
+        public ActionResult LikeCount(int id)
+        {
+            try
+            {
+                _articleRepository.LikeIncrement(id);
+                return RedirectToAction("Details", new { id = id });
+            }
+            catch
+            {
+                return View();
+            }
+        }
         // GET: ArticleController/Delete/5
         public ActionResult Delete(int id)
         {

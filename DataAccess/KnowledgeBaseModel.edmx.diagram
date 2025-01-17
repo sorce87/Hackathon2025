@@ -9,8 +9,8 @@
         <EntityTypeShape EntityType="KnowledgeBaseModel.Product" Width="1.5" PointX="6.125" PointY="0.75" />
         <EntityTypeShape EntityType="KnowledgeBaseModel.User" Width="1.5" PointX="6.125" PointY="2.625" />
         <EntityTypeShape EntityType="KnowledgeBaseModel.ValueStream" Width="1.5" PointX="1.875" PointY="0.75" />
-        <EntityTypeShape EntityType="KnowledgeBaseModel.Comment" Width="1.5" PointX="8.25" PointY="0.75" />
-        <EntityTypeShape EntityType="KnowledgeBaseModel.Article" Width="1.5" PointX="4.125" PointY="0.875" />
+        <EntityTypeShape EntityType="KnowledgeBaseModel.Comment" Width="1.5" PointX="0.75" PointY="5.75" />
+        <EntityTypeShape EntityType="KnowledgeBaseModel.Article" Width="1.5" PointX="3.75" PointY="1" />
         <AssociationConnector Association="KnowledgeBaseModel.FK_Article_Category" />
         <AssociationConnector Association="KnowledgeBaseModel.FK_Article_Product" />
         <AssociationConnector Association="KnowledgeBaseModel.FK_Article_User" />

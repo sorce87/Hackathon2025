@@ -63,9 +63,6 @@
     <Compile Include="Comment.cs">
       <DependentUpon>KnowledgeBaseModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="CommentLink.cs">
-      <DependentUpon>KnowledgeBaseModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Interfaces\IArticleRepository.cs" />
     <Compile Include="Interfaces\ICommentRepository.cs" />
     <Compile Include="Repository\ArticleRepository.cs" />

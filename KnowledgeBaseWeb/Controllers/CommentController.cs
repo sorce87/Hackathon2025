@@ -34,7 +34,7 @@ namespace KnowledgeBaseWeb.Controllers
 
             if (response != null)
             {
-                return RedirectToAction("index", "Article", new { id = articleId });
+                return RedirectToAction("Details", "Article", new { id = articleId });
             }
             return RedirectToAction("index", "Article");
         }
